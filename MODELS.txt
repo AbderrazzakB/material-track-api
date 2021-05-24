@@ -1,0 +1,4 @@
+User: - id: string - fullName: string - email: string - password: string - createAt: date - updateAt: date - deletedAt: date - isActive: boolean
+
+Material: - id: string - name: string - description: string - sku: string - createAt: date - updateAt: date - deletedAt: date - category: string - status: used|broken|standBy - registredBy: Ref<User: string>
+UserMaterial - id: string - userId: Ref<User: string> - materialId: Ref<Material: string> - createAt: date - updateAt: date - deletedAt: date - startUsedAt: date - endUsedAt: date - assignedBy: Ref<User: string>
