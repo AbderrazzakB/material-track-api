@@ -1,0 +1,17 @@
+### Create a user
+POST http://localhost:3005/user HTTP/1.1
+content-type: application/json
+
+{
+    "fullName": "Chaima Hoho",
+    "email": "chaima@go.com",
+    "passwod": "dododod"
+}
+
+### GET a user
+GET http://localhost:3005/user/60af8c69a303c52920c9c3d6 HTTP/1.1
+content-type: application/json
+
+### GET all users
+GET http://localhost:3005/user/all HTTP/1.1
+content-type: application/json
