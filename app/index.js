@@ -1,18 +1,29 @@
 import dotenv from "dotenv";
 dotenv.config();
-import express from "express";
-import db from "./utils/db.js";
-const app = express();
-const port = 3005;
 
+import express from "express";
+import bodyParser from "body-parser";
+
+// cookie-parser
+// helmet
+// morgan
+// cors
+// mongodb / mongoose sub-documents
+// validation
+// argon2
+// jwt
+
+import db from "./utils/db.js";
 db();
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+import routes from "./routes/index.js";
 
-app.get("/ping", (req, res) => res.send("pong"));
+const app = express();
+const POST = 3005;
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.use(bodyParser.json());
+app.use(routes);
+
+app.listen(POST, () => {
+  console.log(`Example app listening at http://localhost:${POST}`);
 });
