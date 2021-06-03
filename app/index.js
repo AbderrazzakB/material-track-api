@@ -3,6 +3,7 @@ dotenv.config();
 
 import express from "express";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 
 // cookie-parser
 // helmet
@@ -20,7 +21,7 @@ import routes from "./routes/index.js";
 
 const app = express();
 const POST = 3005;
-
+app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(routes);
 
