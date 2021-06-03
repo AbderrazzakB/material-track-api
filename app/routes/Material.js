@@ -3,7 +3,7 @@ import Material from "../models/Material.js";
 const router = Router();
 router
   .get("/", (req, res) => {
-    res.json({ message: "Welcome in mterial route" });
+    res.json({ message: "Welcome in material route" });
   })
   .get("/all", async (req, res) => {
     try {

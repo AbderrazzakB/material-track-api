@@ -8,5 +8,5 @@ router.get("/", (req, res) => res.send("Material Track Api"));
 
 router.use("/user", UserRoute);
 // material route
-router.use("/material",MaterialRoute);
+router.use("/material", MaterialRoute);
 export default router;

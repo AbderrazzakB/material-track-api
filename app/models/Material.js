@@ -11,9 +11,7 @@ var materialSchema = new Schema({
         enum: ['used', 'broken', 'standBy'],
         default: 'standBy'
     },
-    registredBy: { type: Schema.Types.ObjectId, ref: 'User' },
-    
-
+    registeredBy: { type: Schema.Types.ObjectId, ref: 'User' },
 } ,{ timestamps: true });
 
 const Material = mongoose.model("Material", materialSchema);
