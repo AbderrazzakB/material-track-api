@@ -22,7 +22,7 @@ const materialSchema = new Schema(
       default: 'standBy',
     },
     registeredBy: { type: Schema.Types.ObjectId, ref: 'User' },
-    users: [materialUserSchema]
+    users: [materialUserSchema],
   },
   { timestamps: true }
 );
