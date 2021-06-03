@@ -1,12 +1,12 @@
-import { Router } from "express";
+import { Router } from 'express';
 const router = Router();
 
-import UserRoute from "./User.js";
-import MaterialRoute from "./Material.js"
+import UserRoute from './User.js';
+import MaterialRoute from './Material.js';
 
-router.get("/", (req, res) => res.send("Material Track Api"));
+router.get('/', (req, res) => res.send('Material Track Api'));
 
-router.use("/user", UserRoute);
+router.use('/user', UserRoute);
 // material route
-router.use("/material", MaterialRoute);
+router.use('/material', MaterialRoute);
 export default router;
