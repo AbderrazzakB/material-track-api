@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { body, validationResult } from 'express-validator';
+
 import User from '../models/User.js';
 const router = Router();
 
@@ -26,14 +28,24 @@ router
       res.json({ error });
     }
   })
-  .post('/', async (req, res) => {
-    try {
-      const { fullName, email, password } = req.body;
-      const user = await User.create({ fullName, email, password });
-      res.json({ user });
-    } catch (error) {
-      res.json({ error });
+  .post(
+    '/',
+    body('email').isEmail(),
+    body('fullName').isString().trim().isLength({ min: 1, max: 50 }),
+    body('password').isLength({ min: 8, max: 16 }),
+    async (req, res) => {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+      try {
+        const { fullName, email, password } = req.body;
+        const user = await User.create({ fullName, email, password });
+        res.json({ user });
+      } catch (error) {
+        res.json({ error });
+      }
     }
-  });
+  );
 
 export default router;
