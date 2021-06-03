@@ -5,7 +5,7 @@ content-type: application/json
 {
     "fullName": "Chaima Hoho",
     "email": "chaima@go.com",
-    "passwod": "dododod"
+    "password": "dodododdd"
 }
 
 ### GET a user
@@ -15,6 +15,7 @@ content-type: application/json
 ### GET all users
 GET http://localhost:3005/user/all HTTP/1.1
 content-type: application/json
+
 ###create a material
 POST http://localhost:3005/material HTTP/1.1
 content-type: application/json
