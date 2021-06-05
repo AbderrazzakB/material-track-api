@@ -3,6 +3,7 @@ import * as argon2 from 'argon2';
 
 const Schema = mongoose.Schema;
 
+// make email unique
 const userSchema = new Schema(
   {
     fullName: String,
