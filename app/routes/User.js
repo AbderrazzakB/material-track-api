@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import { body, validationResult } from 'express-validator';
+import jwt from 'jsonwebtoken';
+import * as argon2 from 'argon2';
 
 import User from '../models/User.js';
 const router = Router();
@@ -29,7 +31,7 @@ router
     }
   })
   .post(
-    '/',
+    '/sign-up',
     body('email').isEmail(),
     body('fullName').isString().trim().isLength({ min: 1, max: 50 }),
     body('password').isLength({ min: 8, max: 16 }),
@@ -41,8 +43,48 @@ router
       try {
         const { fullName, email, password } = req.body;
         const user = await User.create({ fullName, email, password });
-        res.json({ user });
+        const { _id } = user;
+        const token = jwt.sign(
+          { fullName, email, _id },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: process.env.JWT_EXPIRES,
+          }
+        );
+        res.json({ token });
       } catch (error) {
+        res.json({ error });
+      }
+    }
+  )
+  .post(
+    '/sign-in',
+    body('email').isEmail(),
+    body('password').isLength({ min: 8, max: 16 }),
+    async (req, res) => {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+      const { email, password } = req.body;
+      try {
+        const user = await User.findOne({ email });
+        if (!user) return res.json({ error: 'not found' });
+
+        const verify = await argon2.verify(user.password, password);
+        if (!verify) return res.json({ error: 'wrong password' });
+
+        const { _id, fullName } = user;
+        const token = jwt.sign(
+          { fullName, email, _id },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: process.env.JWT_EXPIRES,
+          }
+        );
+        res.json({ token });
+      } catch (error) {
+        console.log(error);
         res.json({ error });
       }
     }
