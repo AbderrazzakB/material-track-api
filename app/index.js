@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import cors from 'cors';
+import jwt from 'express-jwt';
 
 import db from './utils/db.js';
 db();
@@ -28,9 +29,12 @@ app.use(morgan('dev'));
 // cors
 app.use(cors());
 
-// validation
-// argon2
 // jwt
+app.use(
+  jwt({ secret: process.env.JWT_SECRET, algorithms: ['HS256'] }).unless({
+    path: ['/user/sign-in', '/user/sign-up'],
+  })
+);
 
 app.use(bodyParser.json());
 app.use(routes);
