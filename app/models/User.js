@@ -14,7 +14,7 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function () {
   if (this.isModified('password')) {
     this.password = await argon2.hash(this.password);
   }
