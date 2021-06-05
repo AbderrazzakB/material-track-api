@@ -15,7 +15,15 @@ content-type: application/json
 ### GET all users
 GET http://localhost:3005/user/all HTTP/1.1
 content-type: application/json
+### update user 
+PUT http://localhost:3005/user/60b672e4eaaf27267039cac9 HTTP/1.1
+content-type: application/json
 
+{
+    "fullName": "abd errazaq Hoho",
+    "email": "chaima@go.com",
+    "password": "dodododdd"
+}
 ###create a material
 POST http://localhost:3005/material HTTP/1.1
 content-type: application/json

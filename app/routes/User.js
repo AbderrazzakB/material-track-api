@@ -46,6 +46,24 @@ router
         res.json({ error });
       }
     }
-  );
+  )
+  // eslint-disable-next-line prettier/prettier
+  .put(
+    '/:id',
+    async (req, res) =>{
+    const id = req.params.id;
+    try {
+      const { fullName, email, password } = req.body;
+      const user = await User.findById(id);
+      if (!user) {
+        return res.json({ error: 'not found' });
+      } else {
+        user = await user.update({ fullName, email, password });
+        res.json({ user });
+      }
+    } catch (error) {
+      res.json({ error });
+    }
+  });
 
 export default router;
