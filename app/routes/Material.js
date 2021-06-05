@@ -1,5 +1,7 @@
 import { Router } from 'express';
+import { body, validationResult } from 'express-validator';
 import Material from '../models/Material.js';
+
 const router = Router();
 router
   .get('/', (req, res) => {
@@ -25,13 +27,23 @@ router
       res.json({ error });
     }
   })
-  .post('/', async (req, res) => {
-    try {
-      const { name, description, category } = req.body;
-      const material = await Material.create({ name, description, category });
-      res.json({ material });
-    } catch (error) {
-      res.json({ error });
+  .post(
+    '/',
+    body('name').isString(),
+    body('description').isString(),
+    body('category').isString(),
+    async (req, res) => {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+      try {
+        const { name, description, category } = req.body;
+        const material = await Material.create({ name, description, category });
+        res.json({ material });
+      } catch (error) {
+        res.json({ error });
+      }
     }
-  });
+  );
 export default router;
