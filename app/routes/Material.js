@@ -45,5 +45,17 @@ router
         res.json({ error });
       }
     }
-  );
+  )
+  .patch('/:id', async (req, res) => {
+    const id = req.params.id;
+    const { assignedBy, userId, note } = req.body;
+    try {
+      const material = await Material.findById(id);
+      if (!material) return res.json({ error: 'not found' });
+
+      material.users.push({ assignedBy, userId, note });
+      await material.save();
+      res.json({ material });
+    } catch (error) {}
+  });
 export default router;
