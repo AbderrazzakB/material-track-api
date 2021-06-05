@@ -25,3 +25,22 @@ content-type: application/json
     "email": "chaima@go.com",
     "password": "jomanji20202"
 }
+
+### Sign-up
+POST http://localhost:3005/user/sign-up HTTP/1.1
+content-type: application/json
+
+{
+    "fullName": "Riqo",
+    "email": "thaimoran@go.com",
+    "password": "1234567890"
+}
+
+### Sign-in
+POST http://localhost:3005/user/sign-in HTTP/1.1
+content-type: application/json
+
+{
+    "email": "thaimoran@go.com",
+    "password": "1234567890"
+}
