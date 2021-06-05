@@ -1,0 +1,27 @@
+###create a material
+POST http://localhost:3005/material HTTP/1.1
+content-type: application/json
+
+{
+ "name":"c1",
+ "description":"cccc",
+ "category":"chaire"
+}
+
+### GET a material by id
+GET http://localhost:3005/material/60bbea680909bb17d4ad8455 HTTP/1.1
+content-type: application/json
+
+### Set users to material
+PATCH  http://localhost:3005/material/60bbea680909bb17d4ad8455 HTTP/1.1
+content-type: application/json
+
+{
+ "assignedBy": "60af8c69a303c52920c9c3d6", 
+ "userId": "60af8d09b32422441c3194fa", 
+ "note": "Ila hrso ykhalso"
+}
+
+### GET all material
+GET http://localhost:3005/material/all HTTP/1.1
+content-type: application/json

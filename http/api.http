@@ -25,22 +25,3 @@ content-type: application/json
     "email": "chaima@go.com",
     "password": "jomanji20202"
 }
-
-###create a material
-POST http://localhost:3005/material HTTP/1.1
-content-type: application/json
-
-{
-"name":"c1",
-"description":"cccc",
-"category":"chaire"
-
-}
-
-### GET a material by id
-GET http://localhost:3005/material/60b67b89218d4b2898eddc71 HTTP/1.1
-content-type: application/json
-
-### GET all users
-GET http://localhost:3005/material/all HTTP/1.1
-content-type: application/json
